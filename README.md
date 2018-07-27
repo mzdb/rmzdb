@@ -5,18 +5,63 @@ R bindings for the libmzdb C library
 
 ## How to open/close an mzDB connection?
 
+To open a mzdb file with rmzdb, you only need to create a new "MzDb" object, with your database's path as argument. 
+- mzdb_obj <- new("MzDb", "this_is_a_path")
+
+The database will be closed when the object will be destroyed. 
+
 ## How to retrieve a single spectrum?
+
+To retrive a single spectrum, you need to call the function of the class "MzDb" : get_spectrum. It takes as argument the id of the spectrum and will returned an instance of this one.
+
+- id <- 1 #the id of your spectrum
+- spectrum <- mzdb_obj$get_spectrum(id)
+
+WARNING: this function is slow, if you need to access to a large number of spectrum, you should probably use an iterator.
 
 ### How to display its [m/z ; intensity] data?
 
+The data are stored in mzdb_obj$get_data(). It will returned an object which contains the intensity array ( accessible with get_intensity_list() ) and the mz array ( accessible with get_mz_list() ).
+
+- spectrum_data <- spectrum$get_data()
+- mz_list <- spectrum_data$get_mz_list() #the mz list
+- intensity_list <- spectrum_data$get_intensity_list() #the intensity list
+
 ### How to access its meta-data (spectrum header)?
+
+The meta-data/header is stored in mzdb_obj$get_header(). It will returned an object which contains all the meta-data.
+
+- spectrum_header <- spectrum$get_header()
+- spectrum_header$title #will retrieve the title of your spectrum
+
 
 ## How to iterate all spectra?
 
+To iterate, you need to create an object "SpectrumIterator". It's takes as argument a "MzDb" object and a ms_level. If you want to iterate all spectra, you need to set the ms_level argument with -1.
+
+Two function are available, has_next() and next_elem(). The first one will returned "true" if remains spectrum to iterate, else "false". The second, will retrived an instance of the current spectrum. 
+
+- it <- new(SpectrumIterator, m, -1)
+
+- while (it$has_next())
+- {
+- print(it$next_elem()$get_header()$title)
+- }
+
 ## How to iterate spectra for a specific MS level?
+
+If you want to iterate on only one ms_level, you must create a "SpectrumIterator" and set the flag ms_level with the whished ms_level.
 
 ## Other available mzDB queries
 
+All mzDB queries are available in the "MzDb" object. 
+
+- m$get_model_version()
+- m$get_last_time()
+
+## How to handle mzDB error
+
+To know the last error rc, you need to call mzdb_obj$get_last_rc(), if this one is not equals to 0, an error has occured. To get the error message link to the last rc, you need to call mzdb_obj$get_last_error(), if no error occured, the output will be "no error".
 
 # Tutorials for curious developers
 
