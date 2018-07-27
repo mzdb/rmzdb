@@ -193,38 +193,6 @@ public:
 			m_intensity_list = NumericVector(spectrum_data.intensity_array_as_doubles, spectrum_data.intensity_array_as_doubles + spectrum_data.peak_count);
 
 		}
-
-		/*switch (spectrum_data.data_encoding.peak_encoding)
-		{
-		case LOW_RES_PEAK:
-			std::cout << " is LOW_RES_PEAK" << std::endl;
-			m_intensity_list.assign(spectrum_data.intensity_array_as_floats, spectrum_data.intensity_array_as_floats + spectrum_data.peak_count);
-			m_mz_list.assign(spectrum_data.mz_array_as_floats, spectrum_data.mz_array_as_floats + spectrum_data.peak_count);
-		break;
-
-		case HIGH_RES_PEAK:
-			std::cout << " is HIGH_RES_PEAK " << spectrum_data.mz_array_as_doubles[0] << std::endl;
-
-			for (int i = 0; i < spectrum_data.peak_count; ++i)
-			{
-				m_intensity_list.push_back(spectrum_data.intensity_array_as_floats[i]);
-				m_mz_list.push_back(spectrum_data.intensity_array_as_doubles[i]);
-			}
-
-			//m_intensity_list.assign(spectrum_data.intensity_array_as_floats, spectrum_data.intensity_array_as_floats + spectrum_data.peak_count);
-			//m_mz_list.assign(spectrum_data.intensity_array_as_doubles, spectrum_data.intensity_array_as_doubles + spectrum_data.peak_count);
-		break;
-
-		default: //NO_LOSS_PEAK
-			std::cout << " is NO_LOSS_PEAK" << std::endl;
-			m_intensity_list.assign(spectrum_data.mz_array_as_doubles, spectrum_data.mz_array_as_doubles + spectrum_data.peak_count);
-			m_mz_list.assign(spectrum_data.intensity_array_as_doubles, spectrum_data.intensity_array_as_doubles + spectrum_data.peak_count);
-
-		}
-
-		std::cout << " first m/z in vector = " << get_mz_list().at(0) << std::endl;*/
-		
-
 		return (this);
 	}
 
@@ -267,20 +235,6 @@ public:
 	}
 };
 
-//typedef struct Spectrum Spectrum;
-//typedef struct SpectrumHeader SpectrumHeader; 
-//typedef struct SpectrumData SpectrumData;
-
-/*void mzdb_reader_consume_for_each_spectrum_cb(libmzdb_spectrum_t _s, Rcpp::Function callback, void** result) {
-	//Rcpp::Function callback = (Rcpp::Function) r_cb;
-
-	Spectrum * spectrum = new Spectrum();
-	spectrum->from_spectrum_struct(_s);
-
-	SEXP spectrum_sexp = Rcpp::wrap(*spectrum);
-	callback(spectrum_sexp);
-}*/
-
 class MzDb
 {
 private:
@@ -309,7 +263,7 @@ public:
 	MzDb(std::string filename)
 	{
 
-		std::cout << "HELLO WORLD !!" << std::endl;
+		std::cout << "HELLO WORLD..." << std::endl;
 
 		char * c_errmsg;
 		m_err_msg = "no error"; m_rc = 0; //initialise the error msg and the rc
@@ -584,27 +538,6 @@ public:
 		return spectrum->from_spectrum_struct(*c_spectrum);
 	}
 
-	/*void create_for_each_spectrum(Rcpp::Function r_callback, void(*c_callback) (libmzdb_spectrum_t, void*, void**) ) {
-
-	}
-
-	void for_each_spectrum(int ms_level, Rcpp::Function callback, SEXP _spectrum_sexp) {
-		std::cout << "from for_each_spectrum2" << std::endl;
-		//Spectrum* s = get_spectrum(1);
-		//SEXP spectrum_sexp = Rcpp::wrap(*s);
-		//callback(spectrum_sexp);
-
-		libmzdb_spectrum_iterator_for_each(m_db, ms_level, *m_entity_cache, &mzdb_reader_consume_for_each_spectrum_cb, callback, NULL);
-	}*/
-
-	/*SpectrumIterator *create_spectrum_iterator(int ms_level) {
-		std::cout << "from create_spectrum_iterator" << std::endl;
-
-		SpectrumIterator * spec_iter = new SpectrumIterator(this, ms_level);
-
-		return spec_iter;
-	}*/
-
 };
 
 class SpectrumIterator {
@@ -663,12 +596,13 @@ RCPP_EXPOSED_CLASS(SpectrumData);
 RCPP_EXPOSED_CLASS(Spectrum);
 RCPP_EXPOSED_CLASS(MzDb);
 
-RCPP_MODULE(libmzdbR)
+RCPP_MODULE(rmzdb)
 {
 	class_<SpectrumHeader>("SpectrumHeader")
 		.constructor()
 		.field("id", &SpectrumHeader::m_id)
 		.field("initial_id", &SpectrumHeader::m_initial_id)
+		.field("title", &SpectrumHeader::m_title)
 		.field("cycle", &SpectrumHeader::m_cycle)
 		.field("time", &SpectrumHeader::m_time)
 		.field("ms_level", &SpectrumHeader::m_ms_level)

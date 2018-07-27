@@ -6,14 +6,14 @@
 using namespace Rcpp;
 
 
-RcppExport SEXP _rcpp_module_boot_libmzdbR();
+RcppExport SEXP _rcpp_module_boot_rmzdb();
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_rcpp_module_boot_libmzdbR", (DL_FUNC) &_rcpp_module_boot_libmzdbR, 0},
+    {"_rcpp_module_boot_rmzdb", (DL_FUNC) &_rcpp_module_boot_rmzdb, 0},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_libmzdbR(DllInfo *dll) {
+RcppExport void R_init_rmzdb(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

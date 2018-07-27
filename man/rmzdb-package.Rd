@@ -1,20 +1,20 @@
-\name{libmzdbR-package}
-\alias{libmzdbR-package}
-\alias{libmzdbR}
+\name{rmzdb-package}
+\alias{rmzdb-package}
+\alias{rmzdb}
 \docType{package}
-\title{\packageTitle{libmzdbR}}
-\description{\packageDescription{libmzdbR}}
+\title{\packageTitle{rmzdb}}
+\description{\packageDescription{rmzdb}}
 \details{
-  The DESCRIPTION file: \packageDESCRIPTION{libmzdbR}
-  \packageIndices{libmzdbR}
+  The DESCRIPTION file: \packageDESCRIPTION{rmzdb}
+  \packageIndices{rmzdb}
 
   This section should provide a more detailed overview of how to use the
   package, including the most important functions.
 }
 \author{
-  \packageAuthor{libmzdbR}
+  \packageAuthor{rmzdb}
   
-  Maintainer: \packageMaintainer{libmzdbR}
+  Maintainer: \packageMaintainer{rmzdb}
 }
 \references{
   This optional section can contain literature or other references for

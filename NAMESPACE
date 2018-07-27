@@ -1,4 +1,4 @@
-useDynLib(libmzdbR, .registration=TRUE)
+useDynLib(rmzdb, .registration=TRUE)
 exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
 import(Rcpp)

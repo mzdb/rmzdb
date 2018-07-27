@@ -1,1 +1,1 @@
-loadModule("libmzdbR", TRUE)
+loadModule("rmzdb", TRUE)
