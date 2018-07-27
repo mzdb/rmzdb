@@ -3,6 +3,19 @@ R bindings for the libmzdb C library
 
 # Getting started
 
+## How to open/close an mzDB connection?
+
+## How to retrieve a single spectrum?
+
+### How to display its [m/z ; intensity] data?
+
+### How to access its meta-data (spectrum header)?
+
+## How to iterate all spectra?
+
+## How to iterate spectra for a specific MS level?
+
+## Other available mzDB queries
 
 
 # Tutorials for curious developers
