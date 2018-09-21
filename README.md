@@ -10,7 +10,7 @@ To open a mzdb file with rmzdb, you only need to create a new "MzDb" object, wit
 Example:
 ```R
 library(rmzdb)
-mzdb_obj <- new("MzDb", "this_is_a_path")
+mzdb_obj <- new(MzDb, "this_is_a_path")
 ```
 
 The database will be closed when the mzdb_obj object is destroyed. 
@@ -186,7 +186,7 @@ Note that when using iterators RC values (returned by has_next and next_elem met
 * In DESCRIPTION file add: RcppModules: rmzdb
 * In NAMESPACE file add: import(Rcpp)
 * In R folder add a zzz.R file containing: loadModule("rmzdb", TRUE)
-* From parent dir (shell) => R CMD build rmzdb --no-multiarch
+* From parent dir (shell) => R CMD build rmzdb
 * From Rstudio => install.packages("rmzdb", repos = NULL, type="source", INSTALL_opts=c("--no-multiarch"))
 
 For more information read the doc:
